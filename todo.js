@@ -19,15 +19,38 @@ var addItem = function() {
         var key = event.key
         log('event key', key)
         var task = itemEle.value
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && task != '') {
             var template = templateItem(task)
             list.insertAdjacentHTML('beforeend', template)
         }
     })
 }
 
+var checkTask = function() {
+    var tasks = document.querySelectorAll('label')
+    var checkBoxes = document.querySelectorAll('input')
+
+    for (var i = 0; i < checkBoxes.length; i++) {
+        var item = checkBoxes[i]
+        var task = tasks[i]
+        log('task', task)
+        item.addEventListener('change', function(event) {
+            log('change')
+            for (var i = 0; i < tasks.length; i++) {
+                var task = tasks[i]
+                if (checkBoxes[i].checked) {
+                    task.classList.add('task-done')
+                } else {
+                    task.classList.remove('task-done')
+                }
+            }
+        })
+    }
+}
+
 var __main = function() {
     addItem()
+    checkTask()
 }
 
 __main()
