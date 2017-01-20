@@ -3,11 +3,11 @@ var log = function() {
     console.log.apply(console, arguments);
 }
 
-var templateItem = function() {
+var templateBox = function() {
     var t = `
             <div class="todo-item">
                 <h3>TODAY</h3>
-                <button type="button" name="button">+</button>
+                <button class="add-button" type="button" name="button">+</button>
                 <h3>TOMORROW</h3>
                 <h3>UPCOMING</h3>
                 <h3>SOMEDAY</h3>
@@ -16,13 +16,44 @@ var templateItem = function() {
     return t
 }
 
-var box = document.querySelector('.category')
-box.addEventListener('click', function(event) {
-    var template = templateItem()
-    box.insertAdjacentHTML('beforeend', template)
-})
-var __main = function() {
+var templateItem = function() {
+    var item = `
+                <div class="checkoff-item">
+                    <a href="#link" class="checkoff-link">This needs to get done.</a>
+                    <a href="#check" class="checkoff-check">✓</a>
+                </div>
+    `
+    return item
+}
 
+var showDetails = function() {
+    var box = document.querySelector('.category')
+    box.addEventListener('click', function(event) {
+        var target = event.target
+        if (target.classList.contains('category')) {
+            var template = templateBox()
+            box.insertAdjacentHTML('beforeend', template)
+        }
+    })
+}
+
+var addItem = function() {
+    var body = document.querySelector('body')
+    body.addEventListener('click', function(event) {
+        var button = event.target
+        log('event target', button)
+        if (button.classList.contains('add-button')) {
+            var template = templateItem()
+            var hideEle = document.querySelector('.todo-item')
+            body.insertAdjacentHTML('beforeend', template)
+            hideEle.classList.add('hide')
+        }
+    })
+}
+
+var __main = function() {
+    showDetails()
+    addItem()
 }
 
 __main()
