@@ -19,8 +19,9 @@ var templateBox = function() {
 var templateItem = function() {
     var item = `
                 <div class="checkoff-item">
-                    <a href="#link" class="checkoff-link">This needs to get done.</a>
-                    <a href="#check" class="checkoff-check">✓</a>
+                    <a href="#link" class="checkoff-link todo-item">
+                        <img src="plus-icon.png">
+                    </a>
                 </div>
     `
     return item
