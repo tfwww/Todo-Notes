@@ -16,7 +16,7 @@ var templateItem = function(item, done) {
                         <input type="checkbox" name="" value="" ${checked}>
                         <i></i>
                         <span>${item}</span>
-                        <a href='#'>–</a>
+                        <a class="remove" href='#'>–</a>
                     </label>
                 </li>
     `
@@ -91,6 +91,19 @@ var toggleClass = function(ele, className) {
     }
 }
 
+var removeButton = function() {
+    var list = document.querySelector('ul')
+    list.addEventListener('click', function(event) {
+        var link = event.target
+        log('target className', link.className)
+        if (link.className === 'remove') {
+            // log('target in', link)
+            link.parentElement.parentElement.remove()
+            saveTodos()
+        }
+    })
+}
+
 var saveTodos = function() {
     var contents = document.querySelectorAll('.todo-item')
     var tasks = document.querySelectorAll('span')
@@ -132,6 +145,7 @@ var loadData = function() {
 var __main = function() {
     addButton()
     checkButton()
+    removeButton()
     loadTodos()
 }
 
