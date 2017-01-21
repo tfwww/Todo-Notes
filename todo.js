@@ -12,7 +12,10 @@ var templateItem = function(item, done) {
     }
     var item = `
                 <li>
-                    <input type="checkbox" name="" value="" ${checked}><label class="todo-item ${status}">${item}</label>
+                    <label class="todo-item ${status}">
+                        <input type="checkbox" name="" value="" ${checked}>
+                        ${item}
+                    </label>
                 </li>
     `
     return item
@@ -28,8 +31,8 @@ var addButton = function() {
         var status = false
         if (event.key === 'Enter' && task != '') {
             insertItem(task, status)
-            saveTodos()
         }
+        saveTodos()
     })
 }
 
@@ -66,10 +69,10 @@ var checkButton = function() {
     var list = document.querySelector('ul')
     list.addEventListener('change', function(event) {
         var target = event.target
-        // log('target', event)
+        log('target', target)
         if (target.type === 'checkbox') {
             // log('in target', target)
-            var label = target.nextSibling
+            var label = target.parentElement
             // log('label', label)
             toggleClass(label, 'task-done')
             saveTodos()
@@ -93,7 +96,7 @@ var saveTodos = function() {
         var status = c.classList.contains('task-done')
         var item = {
             done: status,
-            content: c.innerHTML,
+            content: c.innerText,
         }
         todos.push(item)
     }
