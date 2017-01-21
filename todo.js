@@ -14,6 +14,7 @@ var templateItem = function(item, done) {
                 <li>
                     <label class="todo-item ${status}">
                         <input type="checkbox" name="" value="" ${checked}>
+                        <i></i>
                         <span>${item}</span>
                         <a href='#'>–</a>
                     </label>
