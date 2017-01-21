@@ -6,24 +6,30 @@ var log = function() {
 var templateItem = function(item) {
     var item = `
                 <li>
-                    <input type="checkbox" name="" value=""><label>${item}</label>
+                    <input type="checkbox" name="" value=""><label class="todo-item">${item}</label>
                 </li>
     `
     return item
 }
 
-var addItem = function() {
+var addButton = function() {
     var list = document.querySelector('.todo-title')
     var itemEle = document.querySelector('#id-input-add')
     itemEle.addEventListener('keydown', function(event) {
         var key = event.key
-        log('event key', key)
+        // log('event key', key)
         var task = itemEle.value
         if (event.key === 'Enter' && task != '') {
-            var template = templateItem(task)
-            list.insertAdjacentHTML('afterend', template)
+            insertItem(task)
+            saveTodos()
         }
     })
+}
+
+var insertItem = function(task) {
+    var list = document.querySelector('.todo-title')
+    var template = templateItem(task)
+    list.insertAdjacentHTML('afterend', template)
 }
 
 var checkTask = function() {
@@ -71,9 +77,40 @@ var toggleClass = function(ele, className) {
     }
 }
 
+var saveTodos = function() {
+    var contents = document.querySelectorAll('.todo-item')
+    var todos = []
+    for (var i = 0; i < contents.length; i++) {
+        var c = contents[i]
+        todos.push(c.innerHTML)
+    }
+    // log('todos', todos)
+    saveData(todos)
+}
+
+var loadTodos = function() {
+    var todos = loadData()
+    log('load todos', todos)
+    for (var i = 0; i < todos.length; i++) {
+        var task = todos[i]
+        insertItem(task)
+    }
+}
+
+var saveData = function(dataArray) {
+    var strData = JSON.stringify(dataArray)
+    localStorage.todos = strData
+}
+
+var loadData = function() {
+    var strData = localStorage.todos
+    return JSON.parse(strData)
+}
+
 var __main = function() {
-    addItem()
+    addButton()
     checkTask()
+    loadTodos()
 }
 
 __main()
