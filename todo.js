@@ -14,7 +14,8 @@ var templateItem = function(item, done) {
                 <li>
                     <label class="todo-item ${status}">
                         <input type="checkbox" name="" value="" ${checked}>
-                        ${item}
+                        <span>${item}</span>
+                        <a href='#'>–</a>
                     </label>
                 </li>
     `
@@ -31,6 +32,7 @@ var addButton = function() {
         var status = false
         if (event.key === 'Enter' && task != '') {
             insertItem(task, status)
+            itemEle.value = ''
         }
         saveTodos()
     })
@@ -90,13 +92,15 @@ var toggleClass = function(ele, className) {
 
 var saveTodos = function() {
     var contents = document.querySelectorAll('.todo-item')
+    var tasks = document.querySelectorAll('span')
     var todos = []
     for (var i = 0; i < contents.length; i++) {
         var c = contents[i]
+        var t = tasks[i]
         var status = c.classList.contains('task-done')
         var item = {
             done: status,
-            content: c.innerText,
+            content: t.innerText,
         }
         todos.push(item)
     }
