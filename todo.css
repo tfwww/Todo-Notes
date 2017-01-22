@@ -13,18 +13,19 @@ body{
 
 /* TO DO LIST
 ================================================== */
+.tdl-container {
+	margin:0px auto;
+	width: 300px;
+}
+
 li {
     list-style-type: none;
+    width:
 }
 
 .task-done {
     color: #586186;
     text-decoration: line-through;
-}
-
-.tdl-holder{
-	margin: 0px auto;
-	width: 300px;
 }
 
 .todo-title {
@@ -53,7 +54,7 @@ li {
 }
 
 li {
-	transition: all .2s linear;
+	transition: all 0.2s linear;
 }
 
 label {
@@ -138,8 +139,8 @@ input[type="text"] {
 	font-size:14px;
 	margin:0;
 	padding:20px 15px;
-	width:96%;
-    transition: all .2s linear;
+	width:270px;
+    transition: all 0.2s linear;
 }
 
 input[type="text"]:hover {
@@ -150,7 +151,7 @@ input[type="text"]:focus {
 	color:#fff;
 }
 
-li.remove {
+li.removeAnimation {
 	-webkit-animation:collapseItem 300ms ease;
 			animation:collapseItem 300ms ease;
 	-webkit-transform-origin: 50% 0%;

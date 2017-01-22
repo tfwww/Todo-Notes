@@ -72,7 +72,7 @@ var checkButton = function() {
     var list = document.querySelector('ul')
     list.addEventListener('change', function(event) {
         var target = event.target
-        log('target', target)
+        // log('target', target)
         if (target.type === 'checkbox') {
             // log('in target', target)
             var label = target.parentElement
@@ -95,13 +95,17 @@ var removeButton = function() {
     var list = document.querySelector('ul')
     list.addEventListener('click', function(event) {
         var link = event.target
-        log('target className', link.className)
-        if (link.className === 'remove') {
+        // log('target className', link.className)
+        if (link.classList.contains('remove')) {
             // log('target in', link)
             link.parentElement.parentElement.remove()
             saveTodos()
         }
     })
+}
+
+var removeAnimation = function(ele) {
+
 }
 
 var saveTodos = function() {
@@ -118,13 +122,13 @@ var saveTodos = function() {
         }
         todos.push(item)
     }
-    log('todos', todos)
+    // log('todos', todos)
     saveData(todos)
 }
 
 var loadTodos = function() {
     var todos = loadData()
-    log('load todos', todos)
+    // log('load todos', todos)
     for (var i = 0; i < todos.length; i++) {
         var task = todos[i].content
         var status = todos[i].done
