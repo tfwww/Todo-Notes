@@ -98,14 +98,23 @@ var removeButton = function() {
         // log('target className', link.className)
         if (link.classList.contains('remove')) {
             // log('target in', link)
-            link.parentElement.parentElement.remove()
+            var liEle = link.parentElement.parentElement
+            removeAnimation(liEle)
+            // liEle.remove()
             saveTodos()
         }
     })
 }
 
 var removeAnimation = function(ele) {
-
+    ele.style.animation = "collapseItem 300ms ease"
+    ele.addEventListener('animationstart', function(event) {
+        log('abc')
+    })
+    ele.addEventListener('animationend', function(event) {
+        log('sdfs')
+        ele.remove()
+    })
 }
 
 var saveTodos = function() {
